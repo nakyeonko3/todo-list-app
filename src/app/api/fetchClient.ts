@@ -1,7 +1,9 @@
 import returnFetch from "return-fetch";
 
+export const BASE_URL = process.env.NEXT_BASE_URL || "http://localhost:3000";
+
 const customFetch = returnFetch({
-  baseUrl: "https://assignment-todolist-api.vercel.app/api/v31232/",
+  baseUrl: BASE_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
