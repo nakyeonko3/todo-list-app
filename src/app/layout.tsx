@@ -1,4 +1,4 @@
-import Header from "@/app/components/Header";
+import Header from "@/app/components/common/Header";
 import { nanumSquare } from "@/app/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
