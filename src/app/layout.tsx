@@ -1,10 +1,14 @@
+import Header from "@/app/components/Header";
+import { nanumSquare } from "@/app/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
-import { nanumSquare } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: "todo-list-app",
   description: "todo-list-app",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -14,10 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={nanumSquare.className}>
-        <div className="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8">
+      <body className={`${nanumSquare.className} `}>
+        <Header />
+        <main className="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );

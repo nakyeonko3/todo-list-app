@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: var(--color-gray-50);
   --foreground: #171717;
 }
 
 @theme inline {
   --max-width-container: 1200px;
+
+  --color-gray-50: #f9fafb;
 
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
@@ -25,7 +27,7 @@
 }
 
 body {
-  background: var(--background);
+  /* background: var(--background); */
   color: var(--foreground);
   box-sizing: border-box;
 }
