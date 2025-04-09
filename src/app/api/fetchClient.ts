@@ -3,14 +3,16 @@ import returnFetch from "return-fetch";
 export const BASE_URL = process.env.NEXT_BASE_URL || "http://localhost:3000";
 
 const customFetch = returnFetch({
-  baseUrl: BASE_URL,
+  baseUrl: "https://assignment-todolist-api.vercel.app/api/v31232/",
   headers: {
-    "Content-Type": "application/json",
     Accept: "application/json",
   },
   interceptors: {
     response: async (response) => {
       if (response.status >= 400) {
+        console.error(
+          `Error: ${response.status} ${response.statusText} - ${response.url}`
+        );
         throw new Error(await response.text());
       }
       return response;

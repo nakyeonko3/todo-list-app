@@ -50,8 +50,8 @@ export const createTodo = (createTodoDto: CreateTodoDto) => {
 };
 
 export const getTodos = ({
-  page,
-  pageSize,
+  page = "1",
+  pageSize = "10",
 }: {
   page?: string;
   pageSize?: string;
@@ -61,11 +61,11 @@ export const getTodos = ({
   );
 };
 
-export const getTodoById = (itemId: string) => {
+export const getTodoById = (itemId: number) => {
   return fetchClient<TodoItem>(`items/${itemId}`);
 };
 
-export const updateTodo = (itemId: string, updateTodoDto: UpdateTodoDto) => {
+export const updateTodo = (itemId: number, updateTodoDto: UpdateTodoDto) => {
   return fetchClient<TodoItem>(`items/${itemId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ export const updateTodo = (itemId: string, updateTodoDto: UpdateTodoDto) => {
   });
 };
 
-export const deleteTodo = (itemId: string) => {
+export const deleteTodo = (itemId: number) => {
   return fetchClient<{ [key: string]: unknown }>(`items/${itemId}`, {
     method: "DELETE",
   });
@@ -89,7 +89,6 @@ export const uploadImage = (uploadImageDto: UploadImageDto) => {
     `images/upload`,
     {
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
       body: formData,
     }
   );
