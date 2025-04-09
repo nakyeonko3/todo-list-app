@@ -18,11 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${nanumSquare.className} `}>
+      <body className={nanumSquare.className}>
         <Header />
-        <main className="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8">
-          {children}
-        </main>
+        <main className="mx-auto w-full max-w-container px-4">{children}</main>
       </body>
     </html>
   );
