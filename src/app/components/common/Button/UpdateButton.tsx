@@ -1,23 +1,24 @@
 import IconButton from "@/app/components/common/Button/IconButton";
 import { cn } from "@/app/utils/styleUtils";
 
-interface EditButtonProps {
+interface UpdateButtonProps {
   label?: string;
   onClick?: () => void;
   className?: string;
 }
 
-export default function EditButton({
+export default function UpdateButton({
   label = "수정 완료",
   onClick,
   className,
-}: EditButtonProps) {
+}: UpdateButtonProps) {
   return (
     <IconButton
       label={label}
       icon="/icons/check_slate.svg"
       onClick={onClick}
       type="submit"
+      showLabelOnMobile={true}
       className={cn("bg-slate-200", className)}
     />
   );
