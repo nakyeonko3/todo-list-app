@@ -9,11 +9,11 @@ export default function useDeleteTodo() {
     onMutate: async (todoId) => {
       queryClient.cancelQueries({ queryKey: [TODOS_QUERY_KEY] });
       const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
-      queryClient.setQueryData([TODOS_QUERY_KEY], (old: TodoItemSummary[]) => {
-        {
-          if (!old) return [];
-          return [...old.filter((todo) => todo.id !== todoId)];
-        }
+      queryClient.setQueryData([TODOS_QUERY_KEY], (old: unknown) => {
+        if (!old || !Array.isArray(old)) return [];
+        return [
+          ...(old as TodoItemSummary[]).filter((todo) => todo.id !== todoId),
+        ];
       });
       return { previousTodos };
     },

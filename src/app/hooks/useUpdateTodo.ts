@@ -9,9 +9,9 @@ export default function useUpdateTodo() {
     onMutate: async (newTodo) => {
       await queryClient.cancelQueries({ queryKey: [TODOS_QUERY_KEY] });
       const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
-      queryClient.setQueryData([TODOS_QUERY_KEY], (old: TodoItemSummary[]) => {
-        if (!old) return [];
-        return old.map((todo) =>
+      queryClient.setQueryData([TODOS_QUERY_KEY], (old: unknown) => {
+        if (!old || !Array.isArray(old)) return [];
+        return (old as TodoItemSummary[]).map((todo) =>
           todo.id === newTodo.itemId
             ? {
                 id: todo.id,
