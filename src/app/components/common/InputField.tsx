@@ -12,7 +12,7 @@ export function InputField({
   const inputId = `${name}-${useId()}`;
   return (
     <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
-      <label htmlFor={inputId} className="text-gray-500 mr-2 hidden">
+      <label htmlFor={inputId} className="text-gray-500 mr-2 sr-only">
         {label}
       </label>
       <input

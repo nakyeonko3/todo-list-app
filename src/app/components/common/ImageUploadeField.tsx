@@ -4,19 +4,17 @@ import useUploadImage from "@/app/hooks/useUploadImage";
 import Image from "next/image";
 import { useId, useRef } from "react";
 
-interface ImageUploaderProps {
+interface ImageUploadeFieldrops {
   initialImageUrl?: string | null;
-  onImageUpload: (imageUrl: string) => void;
   name: string;
   label: string;
 }
 
-export default function ImageUploadField({
+export default function ImageUploadeField({
   initialImageUrl = null,
-  onImageUpload,
   label,
   name,
-}: ImageUploaderProps) {
+}: ImageUploadeFieldrops) {
   const inputId = `${name}-${useId()}`;
 
   const {
@@ -33,7 +31,6 @@ export default function ImageUploadField({
 
   const handleImageDelete = () => {
     setImageUrl(null);
-    onImageUpload("");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -66,7 +63,7 @@ export default function ImageUploadField({
           </div>
         )}
       </div>
-      <label htmlFor={inputId} className="text-gray-500 mb-2 hidden">
+      <label htmlFor={inputId} className="text-gray-500 mb-2 sr-only">
         {label}
       </label>
       <input
@@ -81,7 +78,8 @@ export default function ImageUploadField({
         id={inputId}
         name={name}
         value={imageUrl || ""}
-        className="hidden"
+        className="sr-only"
+        placeholder="업로드된 이미지 URL"
         readOnly
       />
       {imageUrl && (
