@@ -1,4 +1,6 @@
 "use client";
+import Card from "@/app/components/common/Card";
+import CheckButton from "@/app/components/common/CheckButton";
 import ImageUploadeField from "@/app/components/common/ImageUploadeField";
 import useDeleteTodo from "@/app/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/app/hooks/useGetToDoDetail";
@@ -43,30 +45,51 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
     router.push("/");
   };
 
+  const handleCheckButton = (event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log("itemId", todo.id);
+    updateTodo({
+      itemId: todo.id,
+      updateTodoDto: {
+        isCompleted: !todo.isCompleted,
+      },
+    });
+  };
+
   return (
     <div>
       <div className="mb-4">
-        <form className="flex items-center" onSubmit={handleUpdateTodo}>
-          <span className="font-semibold">할 일: </span>
-          <label htmlFor="todo" className="sr-only">
-            할 일
-          </label>
-          <input
-            type="text"
-            name="name"
-            defaultValue={todo.name}
-            className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
-          />
-          <span className="font-semibold ml-4">메모: </span>
-          <label htmlFor="memo" className="sr-only">
-            메모
-          </label>
-          <input
-            type="text"
-            name="memo"
-            defaultValue={todo.memo || ""}
-            className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
-          />
+        <form className="flex flex-col space-y-4" onSubmit={handleUpdateTodo}>
+          <Card
+            isActive={todo.isCompleted}
+            className="flex justify-center rounded-[20px]"
+          >
+            <CheckButton
+              isCompleted={todo.isCompleted}
+              onClick={handleCheckButton}
+            />
+            <label htmlFor="name" className="sr-only">
+              TODO 이름
+            </label>
+            <div className="ml-2" />
+            <input
+              type="text"
+              name="name"
+              defaultValue={todo.name || ""}
+              className="border-0 underline font-bold text-xl w-1/3"
+            />
+          </Card>
+          <div>
+            <label htmlFor="memo" className="sr-only">
+              메모
+            </label>
+            <input
+              type="text"
+              name="memo"
+              defaultValue={todo.memo || ""}
+              className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
+            />
+          </div>
           <ImageUploadeField
             initialImageUrl={todo.imageUrl}
             label={"이미지 업로드"}
