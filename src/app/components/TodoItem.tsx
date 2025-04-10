@@ -46,26 +46,25 @@ export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
   };
 
   return (
-    <li key={id}>
-      <div
-        className={cn(
-          "flex w-full   h-[50px] p-2 items-center border-2 rounded-full border-slate-900",
-          isCompleted && "bg-violet-100"
-        )}
-      >
-        <CheckButton isCompleted={isCompleted} onClick={handleUpdateTodo} />
-        <span
+    <Link href={`/todos/${id}`} className="block">
+      <li key={id}>
+        <div
           className={cn(
-            "text-lg font-normal pl-4 text-slate-800",
-            isCompleted && "line-through "
+            "flex w-full   h-[50px] p-2 items-center border-2 rounded-full border-slate-900",
+            isCompleted && "bg-violet-100"
           )}
         >
-          {name}
-        </span>
-      </div>
-      <Link href={`/todos/${id}`} className="block">
-        {" "}
-      </Link>
-    </li>
+          <CheckButton isCompleted={isCompleted} onClick={handleUpdateTodo} />
+          <span
+            className={cn(
+              "text-lg font-normal pl-4 text-slate-800",
+              isCompleted && "line-through "
+            )}
+          >
+            {name}
+          </span>
+        </div>
+      </li>
+    </Link>
   );
 }
