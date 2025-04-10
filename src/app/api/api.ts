@@ -65,7 +65,13 @@ export const getTodoById = (itemId: number) => {
   return fetchClient<TodoItem>(`items/${itemId}`);
 };
 
-export const updateTodo = (itemId: number, updateTodoDto: UpdateTodoDto) => {
+export const updateTodo = ({
+  itemId,
+  updateTodoDto,
+}: {
+  itemId: number;
+  updateTodoDto: UpdateTodoDto;
+}) => {
   return fetchClient<TodoItem>(`items/${itemId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
