@@ -1,5 +1,6 @@
 "use client";
 
+import PlusButton from "@/app/components/common/PlusButton";
 import useUploadImage from "@/app/hooks/useUploadImage";
 import Image from "next/image";
 import { useId, useRef } from "react";
@@ -39,10 +40,10 @@ export default function ImageUploadeField({
   return (
     <div className="w-full flex flex-col items-center">
       <div
-        className="relative w-[200px] h-[200px] border-2 border-dashed border-slate-300 rounded-md 
-                  flex flex-col justify-center items-center cursor-pointer mb-2"
+        className="relative w-[343px] h-[311px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-md flex flex-col justify-center items-center cursor-pointer mb-2"
         onClick={triggerFileInput}
       >
+        <PlusButton className="absolute bottom-4 right-4" />
         {isUploading ? (
           <div className="text-slate-500">업로드 중...</div>
         ) : imageUrl ? (
@@ -57,8 +58,8 @@ export default function ImageUploadeField({
             <Image
               src="/icons/no_img.svg"
               alt="no image"
-              width={30}
-              height={30}
+              width={64}
+              height={64}
             />
           </div>
         )}
@@ -82,6 +83,7 @@ export default function ImageUploadeField({
         placeholder="업로드된 이미지 URL"
         readOnly
       />
+
       {imageUrl && (
         <button
           type="button"
