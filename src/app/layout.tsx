@@ -1,5 +1,6 @@
 import Header from "@/app/components/common/Header";
 import { nanumSquare } from "@/app/fonts";
+import Providers from "@/app/QueryProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -19,8 +20,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={nanumSquare.className}>
-        <Header />
-        <main className="mx-auto w-full max-w-container px-4">{children}</main>
+        <Providers>
+          <Header />
+          <main className="mx-auto w-full max-w-container px-4">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
