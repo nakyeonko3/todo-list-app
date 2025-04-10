@@ -31,7 +31,7 @@ function TodoItemContent() {
   return (
     <div>
       <Image src="/images/todo.svg" alt="Todo List" width={100} height={100} />
-      <div className="mb-4">
+      <ul className="space-y-2">
         {uncompletedItems.map((item) => (
           <TodoItem
             key={item.id}
@@ -40,9 +40,9 @@ function TodoItemContent() {
             isCompleted={item.isCompleted}
           />
         ))}
-      </div>
+      </ul>
       <Image src="/images/done.svg" alt="Todo List" width={100} height={100} />
-      <div className="mb-4">
+      <ul className="space-y-2">
         {completedItems.map((item) => (
           <TodoItem
             key={item.id}
@@ -51,7 +51,7 @@ function TodoItemContent() {
             isCompleted={item.isCompleted}
           />
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

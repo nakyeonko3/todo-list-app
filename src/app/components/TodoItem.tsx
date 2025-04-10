@@ -1,6 +1,33 @@
 import { TodoItemSummary } from "@/app/api/api";
 import useUpdateTodo from "@/app/hooks/useUpdateTodo";
+import Image from "next/image";
 import Link from "next/link";
+
+interface CheckButtonProps {
+  isCompleted: boolean;
+  onClick: (event: React.MouseEvent) => void;
+}
+function CheckButton({ isCompleted, onClick }: CheckButtonProps) {
+  return (
+    <button onClick={onClick} className="relative w-8 h-8">
+      {isCompleted ? (
+        <Image
+          src="/icons/check_in_circle.svg"
+          alt="Completed Task"
+          width={32}
+          height={32}
+        />
+      ) : (
+        <Image
+          src="/icons/circle.svg"
+          alt="Incomplete Task"
+          width={32}
+          height={32}
+        />
+      )}
+    </button>
+  );
+}
 
 export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
   const updateTodo = useUpdateTodo();
@@ -17,18 +44,15 @@ export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
     });
   };
 
-  //TODO:  TodoItem( 링크(<Link>) 내부에 버튼이 포함되어 있어 중첩된 상호작용 요소 발생중
   return (
-    <Link href={`/todos/${id}`} className="block">
-      <div className="flex items-center justify-between p-4 border-b">
-        <h2>{name}</h2>
-        <button
-          className="ml-4 p-2 bg-blue-500 text-white rounded"
-          onClick={handleUpdateTodo}
-        >
-          {isCompleted ? "완료 취소" : "완료"}
-        </button>
+    <li key={id}>
+      <div className="flex w-full h-[50px] p-2 items-center border-2 rounded-full border-slate-900">
+        <CheckButton isCompleted={isCompleted} onClick={handleUpdateTodo} />
+        <span className="text-lg font-normal pl-4">{name}</span>
       </div>
-    </Link>
+      <Link href={`/todos/${id}`} className="block">
+        {" "}
+      </Link>
+    </li>
   );
 }
