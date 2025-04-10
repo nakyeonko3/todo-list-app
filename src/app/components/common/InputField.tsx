@@ -11,7 +11,8 @@ export function InputField({
 }) {
   const inputId = `${name}-${useId()}`;
   return (
-    <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
+    <div className="w-full h-12 px-6 py-3 rounded-full bg-slate-100 border border-slate-900 flex items-center relative">
+      <div className="w-full h-12 rounded-full absolute left-1 top-1 border bg-slate-900 border-slate-900 -z-10"></div>
       <label htmlFor={inputId} className="text-gray-500 mr-2 sr-only">
         {label}
       </label>
@@ -19,7 +20,7 @@ export function InputField({
         id={inputId}
         name={name}
         type="text"
-        className="bg-transparent border-none outline-none flex-grow"
+        className="bg-transparent border-none outline-none w-full"
         placeholder={placeholder}
       />
     </div>

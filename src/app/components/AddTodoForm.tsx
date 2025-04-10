@@ -26,7 +26,11 @@ export function AddTodoForm() {
 
   return (
     <form className="flex items-center" onSubmit={handleAddTodo}>
-      <InputField label={"할일"} name={"todo"} placeholder={"todo를 입력"} />
+      <InputField
+        label={"할일"}
+        name={"todo"}
+        placeholder={"할 일을 입력해주세요"}
+      />
       <SubmitButton label={"추가"} />
     </form>
   );
