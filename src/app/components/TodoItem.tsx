@@ -1,34 +1,9 @@
 import { TodoItemSummary } from "@/app/api/api";
+import Card from "@/app/components/common/Card";
+import CheckButton from "@/app/components/common/CheckButton";
 import useUpdateTodo from "@/app/hooks/useUpdateTodo";
 import { cn } from "@/app/utils/styleUtils";
-import Image from "next/image";
 import Link from "next/link";
-
-interface CheckButtonProps {
-  isCompleted: boolean;
-  onClick: (event: React.MouseEvent) => void;
-}
-function CheckButton({ isCompleted, onClick }: CheckButtonProps) {
-  return (
-    <button onClick={onClick} className="relative w-8 h-8">
-      {isCompleted ? (
-        <Image
-          src="/icons/check_in_circle.svg"
-          alt="Completed Task"
-          width={32}
-          height={32}
-        />
-      ) : (
-        <Image
-          src="/icons/circle.svg"
-          alt="Incomplete Task"
-          width={32}
-          height={32}
-        />
-      )}
-    </button>
-  );
-}
 
 export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
   const updateTodo = useUpdateTodo();
@@ -48,12 +23,7 @@ export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
   return (
     <Link href={`/todos/${id}`} className="block">
       <li key={id}>
-        <div
-          className={cn(
-            "flex w-full   h-[50px] p-2 items-center border-2 rounded-full border-slate-900",
-            isCompleted && "bg-violet-100"
-          )}
-        >
+        <Card isActive={isCompleted}>
           <CheckButton isCompleted={isCompleted} onClick={handleUpdateTodo} />
           <span
             className={cn(
@@ -63,7 +33,7 @@ export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
           >
             {name}
           </span>
-        </div>
+        </Card>
       </li>
     </Link>
   );
