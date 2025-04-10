@@ -1,4 +1,6 @@
 "use client";
+import DeleteButton from "@/app/components/common/Button/DeleteButton";
+import EditButton from "@/app/components/common/Button/EditButton";
 import Card from "@/app/components/common/Card";
 import CheckButton from "@/app/components/common/CheckButton";
 import ImageUploadeField from "@/app/components/common/ImageUploadeField";
@@ -17,10 +19,6 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
   const handleDelete = () => {
     deleteTodo(todo.id);
     router.push("/");
-  };
-
-  const handleBackButton = () => {
-    router.back();
   };
 
   const handleUpdateTodo = async (event: React.FormEvent) => {
@@ -80,32 +78,17 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
               className="border-0 underline font-bold text-xl w-1/3"
             />
           </Card>
-          <MemoInput defaultValue={todo.memo || ""} />
           <ImageUploadeField
             initialImageUrl={todo.imageUrl}
             label={"이미지 업로드"}
             name={"image"}
           />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md ml-4"
-          >
-            수정 하기
-          </button>
+          <MemoInput defaultValue={todo.memo || ""} />
+          <div className="flex w-[343px]">
+            <EditButton />
+            <DeleteButton onClick={handleDelete} className="ml-4" />
+          </div>
         </form>
-        <span className="font-semibold">상태: </span>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded-md ml-4"
-          onClick={handleDelete}
-        >
-          삭제 하기
-        </button>
-        <button
-          onClick={handleBackButton}
-          className="bg-gray-200 px-4 py-2 rounded-md"
-        >
-          뒤로 가기
-        </button>
       </div>
     </div>
   );

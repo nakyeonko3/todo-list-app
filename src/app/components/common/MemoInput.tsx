@@ -10,7 +10,7 @@ export default function MemoInput({
   className = "",
 }: MemoInputProps) {
   return (
-    <div className="relative w-[696px] h-[311px] overflow-hidden py-6 px-4">
+    <div className="relative w-full h-[311px] overflow-hidden py-6 px-4">
       <div className="flex justify-center">
         <label htmlFor="memo" className="font-extrabold text-amber-800">
           Memo
@@ -28,8 +28,7 @@ export default function MemoInput({
       <Image
         src="/images/memo.png"
         alt="memo"
-        width={696}
-        height={311}
+        fill
         className="absolute top-0 left-0 -z-10"
         priority
       />
