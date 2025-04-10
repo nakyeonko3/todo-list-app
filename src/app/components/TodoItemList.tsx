@@ -8,12 +8,12 @@ function TodoItemContent() {
   const { data: todoItems } = useGetToDos();
 
   const completedItems = useMemo(
-    () => filterTodoItemsByStatus(todoItems, false),
+    () => filterTodoItemsByStatus(todoItems, true),
     [todoItems]
   );
 
   const uncompletedItems = useMemo(
-    () => filterTodoItemsByStatus(todoItems, true),
+    () => filterTodoItemsByStatus(todoItems, false),
     [todoItems]
   );
 
@@ -21,7 +21,7 @@ function TodoItemContent() {
     <div>
       <h2 className="text-2xl font-bold">TODO</h2>
       <div className="mb-4">
-        {completedItems.map((item) => (
+        {uncompletedItems.map((item) => (
           <TodoItem
             key={item.id}
             id={item.id}
@@ -32,7 +32,7 @@ function TodoItemContent() {
       </div>
       <h2 className="text-2xl font-bold">DONE</h2>
       <div className="mb-4">
-        {uncompletedItems.map((item) => (
+        {completedItems.map((item) => (
           <TodoItem
             key={item.id}
             id={item.id}
