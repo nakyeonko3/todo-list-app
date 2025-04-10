@@ -31,7 +31,7 @@ export function AddTodoForm() {
         name={"todo"}
         placeholder={"할 일을 입력해주세요"}
       />
-      <SubmitButton label={"추가"} />
+      <SubmitButton label={"추가하기"} />
     </form>
   );
 }

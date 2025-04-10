@@ -24,6 +24,11 @@
   --color-rose-500: #f43f5e;
   --color-lime-300: #bef264;
   --color-amber-800: #92400e;
+
+  /* --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem; */
 }
 
 body {

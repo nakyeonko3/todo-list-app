@@ -2,7 +2,18 @@
 import TodoItem from "@/app/components/TodoItem";
 import useGetToDos from "@/app/hooks/useGetToDos";
 import { filterTodoItemsByStatus } from "@/app/utils/todoUtils";
+import Image from "next/image";
 import { Suspense, useMemo } from "react";
+
+export default function ToDoItemList() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TodoItemContent />
+      </Suspense>
+    </div>
+  );
+}
 
 function TodoItemContent() {
   const { data: todoItems } = useGetToDos();
@@ -19,7 +30,7 @@ function TodoItemContent() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold">TODO</h2>
+      <Image src="/images/todo.svg" alt="Todo List" width={100} height={100} />
       <div className="mb-4">
         {uncompletedItems.map((item) => (
           <TodoItem
@@ -30,7 +41,7 @@ function TodoItemContent() {
           />
         ))}
       </div>
-      <h2 className="text-2xl font-bold">DONE</h2>
+      <Image src="/images/done.svg" alt="Todo List" width={100} height={100} />
       <div className="mb-4">
         {completedItems.map((item) => (
           <TodoItem
@@ -41,17 +52,6 @@ function TodoItemContent() {
           />
         ))}
       </div>
-    </div>
-  );
-}
-
-export default function ToDoItemList() {
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <TodoItemContent />
-      </Suspense>
     </div>
   );
 }
