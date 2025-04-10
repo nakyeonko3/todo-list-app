@@ -1,10 +1,13 @@
 "use client";
-import { createTodo } from "@/app/api/api";
+// import { createTodo } from "@/app/api/api";
 import { InputField } from "@/app/components/common/InputField";
 import SubmitButton from "@/app/components/common/SubmitButton";
+import useCreateTodo from "@/app/hooks/useCreateTodos";
 import { FormEvent } from "react";
 
 export function AddTodoForm() {
+  const createTodo = useCreateTodo();
+
   const handleAddTodo = async (event: FormEvent) => {
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
@@ -15,7 +18,7 @@ export function AddTodoForm() {
       //TODO: 유저에게 TODO 메시지가 없다고 토스트로 알림 주기
       return;
     }
-    await createTodo({
+    createTodo({
       name: todo,
     });
     form.reset();
