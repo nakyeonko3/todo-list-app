@@ -19,7 +19,7 @@ export default function SubmitButton({
       type="submit"
       onClick={onClick}
       className={cn(className, "w-[56px]")}
-      hideOnMobile={true}
+      showLabelOnMobile={true}
     />
   );
 }

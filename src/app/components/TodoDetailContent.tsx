@@ -1,6 +1,6 @@
 "use client";
 import DeleteButton from "@/app/components/common/Button/DeleteButton";
-import EditButton from "@/app/components/common/Button/EditButton";
+import EditButton from "@/app/components/common/Button/UpdateButton";
 import Card from "@/app/components/common/Card";
 import CheckButton from "@/app/components/common/CheckButton";
 import ImageUploadeField from "@/app/components/common/ImageUploadeField";
@@ -84,9 +84,11 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
             name={"image"}
           />
           <MemoInput defaultValue={todo.memo || ""} />
-          <div className="flex w-[343px]">
-            <EditButton />
-            <DeleteButton onClick={handleDelete} className="ml-4" />
+          <div className="w-full flex justify-center">
+            <div className="flex w-[343px]">
+              <EditButton />
+              <DeleteButton onClick={handleDelete} className="ml-4" />
+            </div>
           </div>
         </form>
       </div>

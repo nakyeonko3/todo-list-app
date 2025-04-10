@@ -18,7 +18,7 @@ export default function UpdateButton({
       icon="/icons/check_slate.svg"
       onClick={onClick}
       type="submit"
-      showLabelOnMobile={true}
+      showLabelOnMobile={false}
       className={cn("bg-slate-200", className)}
     />
   );

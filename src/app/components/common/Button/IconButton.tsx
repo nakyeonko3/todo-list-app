@@ -8,7 +8,7 @@ interface IconButtonProps {
   onClick?: () => void;
   className?: string;
   iconSize?: number;
-  hideOnMobile?: boolean;
+  showLabelOnMobile?: boolean;
 }
 
 export default function IconButton({
@@ -18,14 +18,14 @@ export default function IconButton({
   onClick,
   className,
   iconSize = 16,
-  hideOnMobile = false,
+  showLabelOnMobile = false,
 }: IconButtonProps) {
   return (
     <button
       className={cn(
         "font-bold gap-2 px-4 py-3 w-full h-[52px] rounded-full bg-slate-100 border-2 border-slate-900 flex items-center justify-center relative",
         className,
-        hideOnMobile && "sm:w-[164px]"
+        showLabelOnMobile && "sm:w-[164px]"
       )}
       type={type}
       onClick={onClick}
@@ -39,7 +39,9 @@ export default function IconButton({
         height={iconSize}
       />
       <span
-        className={cn(hideOnMobile ? "hidden sm:inline" : "inline sm:hidden")}
+        className={cn(
+          showLabelOnMobile ? "hidden sm:inline" : "inline sm:hidden"
+        )}
       >
         {label}
       </span>

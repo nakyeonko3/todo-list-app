@@ -1,5 +1,6 @@
 "use client";
 
+import EditImageButton from "@/app/components/common/EditImageButton";
 import PlusButton from "@/app/components/common/PlusButton";
 import useUploadImage from "@/app/hooks/useUploadImage";
 import Image from "next/image";
@@ -31,20 +32,29 @@ export default function ImageUploadeField({
     fileInputRef.current?.click();
   };
 
-  const handleImageDelete = () => {
+  const handleUpdateImage = (event: React.MouseEvent) => {
     setImageUrl(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    triggerFileInput(event);
   };
 
   return (
     <div className="w-full flex flex-col items-center">
       <div className="relative w-full h-[311px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-md flex flex-col justify-center items-center mb-2">
-        <PlusButton
-          className="absolute bottom-4 right-4"
-          onClick={triggerFileInput}
-        />
+        {imageUrl ? (
+          <EditImageButton
+            className="absolute bottom-4 right-4 z-10"
+            onClick={triggerFileInput}
+          />
+        ) : (
+          <PlusButton
+            className="absolute bottom-4 right-4 z-10"
+            onClick={handleUpdateImage}
+          />
+        )}
+
         {isUploading ? (
           <div className="text-slate-500">업로드 중...</div>
         ) : imageUrl ? (
@@ -84,16 +94,6 @@ export default function ImageUploadeField({
         placeholder="업로드된 이미지 URL"
         readOnly
       />
-
-      {imageUrl && (
-        <button
-          type="button"
-          className="text-red-500 text-sm mt-2"
-          onClick={handleImageDelete}
-        >
-          이미지 삭제
-        </button>
-      )}
     </div>
   );
 }

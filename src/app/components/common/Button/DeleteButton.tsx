@@ -16,6 +16,7 @@ export default function DeleteButton({
       icon="/icons/X.svg"
       onClick={onClick}
       type="button"
+      showLabelOnMobile={false}
       className={cn("bg-rose-500 text-white", className)}
     />
   );
