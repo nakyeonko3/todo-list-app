@@ -25,7 +25,7 @@ export function AddTodoForm() {
   };
 
   return (
-    <form className="flex items-center" onSubmit={handleAddTodo}>
+    <form className="flex items-center space-x-2" onSubmit={handleAddTodo}>
       <InputField
         label={"할일"}
         name={"todo"}

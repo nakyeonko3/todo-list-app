@@ -29,29 +29,33 @@ function TodoItemContent() {
   );
 
   return (
-    <div>
-      <Image src="/images/todo.svg" alt="Todo List" width={100} height={100} />
-      <ul className="space-y-2">
-        {uncompletedItems.map((item) => (
-          <TodoItem
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            isCompleted={item.isCompleted}
-          />
-        ))}
-      </ul>
-      <Image src="/images/done.svg" alt="Todo List" width={100} height={100} />
-      <ul className="space-y-2">
-        {completedItems.map((item) => (
-          <TodoItem
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            isCompleted={item.isCompleted}
-          />
-        ))}
-      </ul>
+    <div className="space-y-12">
+      <div className="space-y-4">
+        <Image src="/images/todo.svg" alt="TODO" width={100} height={100} />
+        <ul className="space-y-4">
+          {uncompletedItems.map((item) => (
+            <TodoItem
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              isCompleted={item.isCompleted}
+            />
+          ))}
+        </ul>
+      </div>
+      <div className="space-y-4">
+        <Image src="/images/done.svg" alt="" width={100} height={100} />
+        <ul className="space-y-4">
+          {completedItems.map((item) => (
+            <TodoItem
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              isCompleted={item.isCompleted}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

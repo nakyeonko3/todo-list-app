@@ -4,10 +4,9 @@ import ToDoItemList from "@/app/components/TodoItemList";
 export default function Home() {
   return (
     <>
-      <div>
-        <AddTodoForm />
-        <ToDoItemList />
-      </div>
+      <AddTodoForm />
+      <div className="my-6"></div>
+      <ToDoItemList />
     </>
   );
 }

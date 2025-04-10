@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={nanumSquare.className}>
         <Providers>
           <Header />
-          <main className="mx-auto w-full max-w-container px-4">
+          <main className="mx-auto w-full max-w-container px-4 pt-4">
             {children}
           </main>
         </Providers>
