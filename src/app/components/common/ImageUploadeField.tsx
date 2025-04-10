@@ -26,7 +26,8 @@ export default function ImageUploadeField({
   } = useUploadImage(initialImageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const triggerFileInput = () => {
+  const triggerFileInput = (event: React.MouseEvent) => {
+    event.preventDefault();
     fileInputRef.current?.click();
   };
 
@@ -39,11 +40,11 @@ export default function ImageUploadeField({
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div
-        className="relative w-[343px] h-[311px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-md flex flex-col justify-center items-center cursor-pointer mb-2"
-        onClick={triggerFileInput}
-      >
-        <PlusButton className="absolute bottom-4 right-4" />
+      <div className="relative w-[343px] h-[311px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-md flex flex-col justify-center items-center mb-2">
+        <PlusButton
+          className="absolute bottom-4 right-4"
+          onClick={triggerFileInput}
+        />
         {isUploading ? (
           <div className="text-slate-500">업로드 중...</div>
         ) : imageUrl ? (

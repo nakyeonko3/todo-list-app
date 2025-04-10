@@ -1,7 +1,7 @@
 import { useId } from "react";
 
 export function InputField({
-  placeholder = "검색어를 입력하세요",
+  placeholder = "",
   label,
   name,
 }: {

@@ -2,6 +2,7 @@
 import Card from "@/app/components/common/Card";
 import CheckButton from "@/app/components/common/CheckButton";
 import ImageUploadeField from "@/app/components/common/ImageUploadeField";
+import MemoInput from "@/app/components/common/MemoInput";
 import useDeleteTodo from "@/app/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/app/hooks/useGetToDoDetail";
 import useUpdateTodo from "@/app/hooks/useUpdateTodo";
@@ -79,17 +80,7 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
               className="border-0 underline font-bold text-xl w-1/3"
             />
           </Card>
-          <div>
-            <label htmlFor="memo" className="sr-only">
-              메모
-            </label>
-            <input
-              type="text"
-              name="memo"
-              defaultValue={todo.memo || ""}
-              className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
-            />
-          </div>
+          <MemoInput defaultValue={todo.memo || ""} />
           <ImageUploadeField
             initialImageUrl={todo.imageUrl}
             label={"이미지 업로드"}
@@ -103,11 +94,6 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
           </button>
         </form>
         <span className="font-semibold">상태: </span>
-        <span
-          className={`${todo.isCompleted ? "text-green-500" : "text-red-500"}`}
-        >
-          {todo.isCompleted ? "완료" : "미완료"}
-        </span>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded-md ml-4"
           onClick={handleDelete}
