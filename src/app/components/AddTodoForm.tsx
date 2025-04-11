@@ -1,7 +1,7 @@
 "use client";
 // import { createTodo } from "@/app/api/api";
+import SubmitButton from "@/app/components/common/Button/SubmitButton";
 import { InputField } from "@/app/components/common/InputField";
-import SubmitButton from "@/app/components/common/SubmitButton";
 import useCreateTodo from "@/app/hooks/useCreateTodos";
 import { FormEvent } from "react";
 
@@ -25,9 +25,13 @@ export function AddTodoForm() {
   };
 
   return (
-    <form className="flex items-center" onSubmit={handleAddTodo}>
-      <InputField label={"할일"} name={"todo"} placeholder={"todo를 입력"} />
-      <SubmitButton label={"추가"} />
+    <form className="flex items-center space-x-2" onSubmit={handleAddTodo}>
+      <InputField
+        label={"할일"}
+        name={"todo"}
+        placeholder={"할 일을 입력해주세요"}
+      />
+      <SubmitButton label={"추가하기"} />
     </form>
   );
 }

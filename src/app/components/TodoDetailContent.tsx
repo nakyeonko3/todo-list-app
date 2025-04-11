@@ -1,5 +1,10 @@
 "use client";
+import DeleteButton from "@/app/components/common/Button/DeleteButton";
+import EditButton from "@/app/components/common/Button/UpdateButton";
+import Card from "@/app/components/common/Card";
+import CheckButton from "@/app/components/common/CheckButton";
 import ImageUploadeField from "@/app/components/common/ImageUploadeField";
+import MemoInput from "@/app/components/common/MemoInput";
 import useDeleteTodo from "@/app/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/app/hooks/useGetToDoDetail";
 import useUpdateTodo from "@/app/hooks/useUpdateTodo";
@@ -14,10 +19,6 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
   const handleDelete = () => {
     deleteTodo(todo.id);
     router.push("/");
-  };
-
-  const handleBackButton = () => {
-    router.back();
   };
 
   const handleUpdateTodo = async (event: React.FormEvent) => {
@@ -43,60 +44,58 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
     router.push("/");
   };
 
+  const handleCheckButton = (event: React.MouseEvent) => {
+    event.preventDefault();
+    updateTodo({
+      itemId: todo.id,
+      updateTodoDto: {
+        name: todo.name,
+        isCompleted: !todo.isCompleted,
+      },
+    });
+  };
+
   return (
     <div>
       <div className="mb-4">
-        <form className="flex items-center" onSubmit={handleUpdateTodo}>
-          <span className="font-semibold">할 일: </span>
-          <label htmlFor="todo" className="sr-only">
-            할 일
-          </label>
-          <input
-            type="text"
-            name="name"
-            defaultValue={todo.name}
-            className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
-          />
-          <span className="font-semibold ml-4">메모: </span>
-          <label htmlFor="memo" className="sr-only">
-            메모
-          </label>
-          <input
-            type="text"
-            name="memo"
-            defaultValue={todo.memo || ""}
-            className="border border-gray-300 rounded-md px-4 py-2 ml-2 flex-grow"
-          />
-          <ImageUploadeField
-            initialImageUrl={todo.imageUrl}
-            label={"이미지 업로드"}
-            name={"image"}
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md ml-4"
+        <form className="flex flex-col space-y-4" onSubmit={handleUpdateTodo}>
+          <Card
+            isActive={todo.isCompleted}
+            className="flex justify-center rounded-[20px]"
           >
-            수정 하기
-          </button>
+            <CheckButton
+              isCompleted={todo.isCompleted}
+              onClick={handleCheckButton}
+            />
+            <label htmlFor="name" className="sr-only">
+              TODO 이름
+            </label>
+            <div className="ml-2" />
+            <input
+              type="text"
+              name="name"
+              defaultValue={todo.name || ""}
+              className="border-0 underline font-bold text-xl w-1/3"
+            />
+          </Card>
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <ImageUploadeField
+              initialImageUrl={todo.imageUrl}
+              label={"이미지 업로드"}
+              name={"image"}
+            />
+            <MemoInput
+              defaultValue={todo.memo || ""}
+              className="lg:col-span-2"
+            />
+          </div>
+          <div className="w-full flex justify-center lg:justify-end">
+            <div className="flex w-[343px] ">
+              <EditButton />
+              <DeleteButton onClick={handleDelete} className="ml-4" />
+            </div>
+          </div>
         </form>
-        <span className="font-semibold">상태: </span>
-        <span
-          className={`${todo.isCompleted ? "text-green-500" : "text-red-500"}`}
-        >
-          {todo.isCompleted ? "완료" : "미완료"}
-        </span>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded-md ml-4"
-          onClick={handleDelete}
-        >
-          삭제 하기
-        </button>
-        <button
-          onClick={handleBackButton}
-          className="bg-gray-200 px-4 py-2 rounded-md"
-        >
-          뒤로 가기
-        </button>
       </div>
     </div>
   );

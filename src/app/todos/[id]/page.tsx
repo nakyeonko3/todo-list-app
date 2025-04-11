@@ -1,21 +1,20 @@
 import TodoDetailContent from "@/app/components/TodoDetailContent";
 import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+
+// Next.js의 동적 매개변수 타입 지정
 
 export default async function TodoDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  //TODO: todoId가 number가 아닐 때 에 대한 예외처리 필요
-
   return (
-    <div className="">
-      <h1 className="text-2xl font-bold mb-4">할 일 상세 보기</h1>
+    <ErrorBoundary fallback={<div>에러 발생</div>}>
       <Suspense fallback={<div>Loading...</div>}>
         <TodoDetailContent itemId={id} />
       </Suspense>
-    </div>
+    </ErrorBoundary>
   );
 }

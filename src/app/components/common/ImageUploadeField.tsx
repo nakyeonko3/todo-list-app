@@ -1,6 +1,9 @@
 "use client";
 
+import EditImageButton from "@/app/components/common/EditImageButton";
+import PlusButton from "@/app/components/common/PlusButton";
 import useUploadImage from "@/app/hooks/useUploadImage";
+import { cn } from "@/app/utils/styleUtils";
 import Image from "next/image";
 import { useId, useRef } from "react";
 
@@ -8,12 +11,14 @@ interface ImageUploadeFieldrops {
   initialImageUrl?: string | null;
   name: string;
   label: string;
+  className?: string;
 }
 
 export default function ImageUploadeField({
   initialImageUrl = null,
   label,
   name,
+  className = "",
 }: ImageUploadeFieldrops) {
   const inputId = `${name}-${useId()}`;
 
@@ -25,24 +30,41 @@ export default function ImageUploadeField({
   } = useUploadImage(initialImageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const triggerFileInput = () => {
+  const triggerFileInput = (event: React.MouseEvent) => {
+    event.preventDefault();
     fileInputRef.current?.click();
   };
 
-  const handleImageDelete = () => {
+  const handleUpdateImage = (event: React.MouseEvent) => {
     setImageUrl(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    triggerFileInput(event);
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className={cn(className, "w-full flex flex-col items-center")}>
       <div
-        className="relative w-[200px] h-[200px] border-2 border-dashed border-slate-300 rounded-md 
-                  flex flex-col justify-center items-center cursor-pointer mb-2"
-        onClick={triggerFileInput}
+        className={cn(
+          "relative w-full h-[311px] rounded-3xl flex flex-col justify-center items-center mb-2 overflow-hidden",
+          imageUrl
+            ? "border-0"
+            : "bg-slate-50 border-2 border-dashed border-slate-300"
+        )}
       >
+        {imageUrl ? (
+          <EditImageButton
+            className="absolute bottom-4 right-4 z-10"
+            onClick={triggerFileInput}
+          />
+        ) : (
+          <PlusButton
+            className="absolute bottom-4 right-4 z-10"
+            onClick={handleUpdateImage}
+          />
+        )}
+
         {isUploading ? (
           <div className="text-slate-500">업로드 중...</div>
         ) : imageUrl ? (
@@ -57,8 +79,8 @@ export default function ImageUploadeField({
             <Image
               src="/icons/no_img.svg"
               alt="no image"
-              width={30}
-              height={30}
+              width={64}
+              height={64}
             />
           </div>
         )}
@@ -82,15 +104,6 @@ export default function ImageUploadeField({
         placeholder="업로드된 이미지 URL"
         readOnly
       />
-      {imageUrl && (
-        <button
-          type="button"
-          className="text-red-500 text-sm mt-2"
-          onClick={handleImageDelete}
-        >
-          이미지 삭제
-        </button>
-      )}
     </div>
   );
 }
