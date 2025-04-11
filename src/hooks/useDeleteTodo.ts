@@ -1,5 +1,6 @@
 import { deleteTodo, TodoItemSummary } from "@/api/api";
-import { TODOS_QUERY_KEY } from "@/app/constants";
+import { TODOS_QUERY_KEY } from "@/constants/queries";
+import { showToast } from "@/utils/showToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useDeleteTodo() {
@@ -19,6 +20,7 @@ export default function useDeleteTodo() {
     },
     onError: (_error, _todoId, context) => {
       queryClient.setQueryData([TODOS_QUERY_KEY], context?.previousTodos);
+      showToast("TODO 삭제에 실패했습니다", "failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [TODOS_QUERY_KEY] });

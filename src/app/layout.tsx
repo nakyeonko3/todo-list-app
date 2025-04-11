@@ -1,5 +1,6 @@
 import Header from "@/components/ui/Header";
 import Providers from "@/providers/QueryProvider";
+import ToastProvider from "@/providers/ToastProvider";
 import { nanumSquare } from "@/styles/fonts";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body className={nanumSquare.className}>
         <Providers>
           <Header />
-          <main className="mx-auto w-full max-w-container px-4 pt-4">
-            {children}
-          </main>
+          <ToastProvider>
+            <main className="mx-auto w-full max-w-container px-4 pt-4">
+              {children}
+            </main>
+          </ToastProvider>
         </Providers>
       </body>
     </html>
