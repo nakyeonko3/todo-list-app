@@ -12,7 +12,7 @@ export default function CheckButton({
     <button
       onClick={onClick}
       className={cn(
-        "relative w-8 h-8 rounded-full flex items-center justify-center",
+        "relative w-8 h-8 rounded-full flex items-center justify-center cursor-pointer",
         isCompleted ? "bg-violet-600" : "bg-yellow-50 border-2 border-slate-900"
       )}
     >
