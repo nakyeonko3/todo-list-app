@@ -2,14 +2,12 @@
 
 import ImageUploadeField from "@/components/forms/ImageUploadeField";
 import MemoInput from "@/components/forms/MemoInput";
-import CheckButton from "@/components/ui/Button/CheckButton";
+import TodoNameHeaderCard from "@/components/todos/TodoNameHeaderCard";
 import DeleteButton from "@/components/ui/Button/DeleteButton";
 import UpdateButton from "@/components/ui/Button/UpdateButton";
-import Card from "@/components/ui/Card";
 import useDeleteTodo from "@/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/hooks/useGetToDoDetail";
 import useUpdateTodo from "@/hooks/useUpdateTodo";
-import { preventEnterSubmit } from "@/utils/keyboardEventUtils";
 import { showToast } from "@/utils/showToast";
 import { useRouter } from "next/navigation";
 
@@ -31,6 +29,8 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
     const name = formData.get("name") as string;
     const memo = formData.get("memo") as string;
     const imageUrl = formData.get("image") as string;
+    const isCompleted = (formData.get("completed") as string) === "true";
+
     if (!name) {
       showToast("할 일을 입력해주세요", "failed");
       return;
@@ -41,50 +41,27 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
         name,
         memo,
         imageUrl,
+        isCompleted,
       },
     });
     router.push("/");
-  };
-
-  const handleCheckButton = (event: React.MouseEvent) => {
-    event.preventDefault();
-    updateTodo({
-      itemId: todo.id,
-      updateTodoDto: {
-        name: todo.name,
-        isCompleted: !todo.isCompleted,
-      },
-    });
   };
 
   return (
     <div>
       <div className="mb-4">
         <form className="flex flex-col space-y-4" onSubmit={handleUpdateTodo}>
-          <Card
-            isActive={todo.isCompleted}
-            className="flex justify-center rounded-[20px]"
-          >
-            <CheckButton
-              isCompleted={todo.isCompleted}
-              onClick={handleCheckButton}
-            />
-            <label htmlFor="name" className="sr-only">
-              TODO 이름
-            </label>
-            <div className="ml-2" />
-            <input
-              type="text"
-              name="name"
-              defaultValue={todo.name || ""}
-              className="border-0 underline font-bold text-xl w-1/3"
-              onKeyDown={preventEnterSubmit}
-            />
-          </Card>
+          <TodoNameHeaderCard
+            checkboxName="completed"
+            textInputName="name"
+            initialCompleted={todo.isCompleted}
+            initalText={todo.name}
+            className="mb-4"
+          />
           <div className="lg:grid lg:grid-cols-3 lg:gap-8">
             <ImageUploadeField
               initialImageUrl={todo.imageUrl}
-              label={"이미지 업로드"}
+              label="이미지 업로드"
               name={"image"}
             />
             <MemoInput
