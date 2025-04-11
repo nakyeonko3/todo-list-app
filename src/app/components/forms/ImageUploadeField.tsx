@@ -1,7 +1,7 @@
 "use client";
 
-import EditImageButton from "@/app/components/common/EditImageButton";
-import PlusButton from "@/app/components/common/PlusButton";
+import EditImageButton from "@/app/components/ui/Button/EditImageButton";
+import PlusButton from "@/app/components/ui/Button/PlusButton";
 import useUploadImage from "@/app/hooks/useUploadImage";
 import { cn } from "@/app/utils/styleUtils";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-import TodoDetailContent from "@/app/components/TodoDetailContent";
+import TodoDetailContent from "@/app/components/todos/TodoDetailContent";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 

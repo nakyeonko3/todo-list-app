@@ -1,5 +1,5 @@
 "use client";
-import TodoSection from "@/app/components/TodoSection";
+import TodoSection from "@/app/components/todos/TodoSection";
 import useGetToDos from "@/app/hooks/useGetToDos";
 import { filterTodoItemsByStatus } from "@/app/utils/todoUtils";
 import { Suspense, useMemo } from "react";

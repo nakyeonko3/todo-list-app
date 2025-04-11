@@ -1,4 +1,4 @@
-import Header from "@/app/components/common/Header";
+import Header from "@/app/components/ui/Header";
 import { nanumSquare } from "@/app/fonts";
 import Providers from "@/app/QueryProvider";
 import type { Metadata } from "next";

@@ -1,10 +1,10 @@
 "use client";
-import DeleteButton from "@/app/components/common/Button/DeleteButton";
-import EditButton from "@/app/components/common/Button/UpdateButton";
-import Card from "@/app/components/common/Card";
-import CheckButton from "@/app/components/common/CheckButton";
-import ImageUploadeField from "@/app/components/common/ImageUploadeField";
-import MemoInput from "@/app/components/common/MemoInput";
+import CheckButton from "@/app/components/ui/Button/CheckButton";
+import DeleteButton from "@/app/components/ui/Button/DeleteButton";
+import EditButton from "@/app/components/ui/Button/UpdateButton";
+import Card from "@/app/components/ui/Card";
+import ImageUploadeField from "@/app/components/forms/ImageUploadeField";
+import MemoInput from "@/app/components/forms/MemoInput";
 import useDeleteTodo from "@/app/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/app/hooks/useGetToDoDetail";
 import useUpdateTodo from "@/app/hooks/useUpdateTodo";

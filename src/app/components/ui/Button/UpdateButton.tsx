@@ -1,4 +1,4 @@
-import IconButton from "@/app/components/common/Button/IconButton";
+import IconButton from "@/app/components/ui/Button/IconButton";
 import { cn } from "@/app/utils/styleUtils";
 
 interface UpdateButtonProps {

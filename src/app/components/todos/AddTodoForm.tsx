@@ -1,7 +1,7 @@
 "use client";
 // import { createTodo } from "@/app/api/api";
-import SubmitButton from "@/app/components/common/Button/SubmitButton";
-import { InputField } from "@/app/components/common/InputField";
+import SubmitButton from "@/app/components/ui/Button/SubmitButton";
+import { InputField } from "@/app/components/forms/InputField";
 import useCreateTodo from "@/app/hooks/useCreateTodos";
 import { FormEvent } from "react";
 

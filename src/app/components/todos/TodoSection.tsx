@@ -1,6 +1,6 @@
 import { TodoItemSummary } from "@/app/api/api";
-import TodoItem from "@/app/components/TodoItem";
-import { EmptyState } from "@/app/components/EmptyState";
+import TodoItem from "@/app/components/todos/TodoItem";
+import { EmptyState } from "@/app/components/todos/EmptyState";
 import Image from "next/image";
 
 interface TodoSectionProps {
