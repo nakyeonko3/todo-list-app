@@ -9,6 +9,8 @@ import Card from "@/components/ui/Card";
 import useDeleteTodo from "@/hooks/useDeleteTodo";
 import useGetDetailTodo from "@/hooks/useGetToDoDetail";
 import useUpdateTodo from "@/hooks/useUpdateTodo";
+import { preventEnterSubmit } from "@/utils/keyboardEventUtils";
+import { showToast } from "@/utils/showToast";
 import { useRouter } from "next/navigation";
 
 export default function TodoDetailContent({ itemId }: { itemId: string }) {
@@ -16,7 +18,7 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
   const deleteTodo = useDeleteTodo();
   const updateTodo = useUpdateTodo();
   const router = useRouter();
-  // TODO: TodoDetailConent 로딩 및 에러 상태 처리 필요
+
   const handleDelete = () => {
     deleteTodo(todo.id);
     router.push("/");
@@ -29,9 +31,8 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
     const name = formData.get("name") as string;
     const memo = formData.get("memo") as string;
     const imageUrl = formData.get("image") as string;
-    // TODO: 수정 실패시, 에러 처리 로직 필요, 사용자에게 피드백 제공 (예: 알림창, 토스트 메시지 등)
     if (!name) {
-      console.error("수정 실패");
+      showToast("할 일을 입력해주세요", "failed");
       return;
     }
     updateTodo({
@@ -77,6 +78,7 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
               name="name"
               defaultValue={todo.name || ""}
               className="border-0 underline font-bold text-xl w-1/3"
+              onKeyDown={preventEnterSubmit}
             />
           </Card>
           <div className="lg:grid lg:grid-cols-3 lg:gap-8">
