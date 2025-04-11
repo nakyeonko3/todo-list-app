@@ -21,9 +21,3 @@ export const nanumSquare = localFont({
   display: "swap",
   variable: "--font-nanum-square",
 });
-
-export const hsSantokki = localFont({
-  src: "../../public/fonts/HSSantokki/HSSantokki-Regular.woff2",
-  display: "swap",
-  variable: "--font-hs-santokki",
-});

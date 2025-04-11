@@ -2,7 +2,14 @@ import TodoDetailContent from "@/app/components/TodoDetailContent";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-export default function TodoDetailPage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function TodoDetailPage({ params }: PageProps) {
   const { id } = params;
 
   return (
