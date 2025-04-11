@@ -9,8 +9,7 @@ export default function useUpdateTodo() {
     onMutate: async (newTodo) => {
       await queryClient.cancelQueries({ queryKey: [TODOS_QUERY_KEY] });
       const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
-      queryClient.setQueryData([TODOS_QUERY_KEY], (old: unknown) => {
-        if (!old || !Array.isArray(old)) return [];
+      queryClient.setQueryData([TODOS_QUERY_KEY], (old: TodoItemSummary[]) => {
         return (old as TodoItemSummary[]).map((todo) =>
           todo.id === newTodo.itemId
             ? {
@@ -25,10 +24,11 @@ export default function useUpdateTodo() {
       queryClient.setQueryData(
         [TODO_DETAIL_QUERY_KEY, newTodo.itemId],
         (old: unknown) => {
-          if (!old || typeof old !== "object") return {};
           const typedOld = old as TodoItem;
           return {
-            ...old,
+            id: newTodo.itemId ?? typedOld.id,
+            imageUrl: newTodo.updateTodoDto.imageUrl ?? typedOld.imageUrl,
+            memo: newTodo.updateTodoDto.memo ?? typedOld.memo,
             name: newTodo.updateTodoDto.name ?? typedOld.name,
             isCompleted:
               newTodo.updateTodoDto.isCompleted ?? typedOld.isCompleted,
