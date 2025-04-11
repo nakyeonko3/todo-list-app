@@ -1,7 +1,5 @@
 # Todo List App
 
-![Todo List App](/public/images/logo.svg)
-
 ## 기술 스택
 
 - **Next.js**
