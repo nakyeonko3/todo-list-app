@@ -1,8 +1,8 @@
-import Header from "@/app/components/ui/Header";
-import { nanumSquare } from "@/app/fonts";
-import Providers from "@/app/QueryProvider";
+import Header from "@/components/ui/Header";
+import Providers from "@/providers/QueryProvider";
+import { nanumSquare } from "@/styles/fonts";
+import "@/styles/globals.css";
 import type { Metadata } from "next";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "todo-list-app",
