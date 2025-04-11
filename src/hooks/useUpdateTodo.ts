@@ -1,44 +1,56 @@
-import { TodoItem, TodoItemSummary, updateTodo } from "@/api/api";
+import { TodoItem, updateTodo } from "@/api/api";
 import { TODO_DETAIL_QUERY_KEY, TODOS_QUERY_KEY } from "@/constants/queries";
+import { showToast } from "@/utils/showToast";
+import { textShortener } from "@/utils/textShorten";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useUpdateTodo() {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: updateTodo,
-    onMutate: async (newTodo) => {
-      await queryClient.cancelQueries({ queryKey: [TODOS_QUERY_KEY] });
-      const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
-      queryClient.setQueryData([TODOS_QUERY_KEY], (old: TodoItemSummary[]) => {
-        return (old as TodoItemSummary[]).map((todo) =>
-          todo.id === newTodo.itemId
-            ? {
-                id: todo.id,
-                name: newTodo.updateTodoDto.name ?? todo.name,
-                isCompleted:
-                  newTodo.updateTodoDto.isCompleted ?? todo.isCompleted,
-              }
-            : todo
+    onMutate: async (updatedTodoItem) => {
+      await queryClient.cancelQueries({ queryKey: [TODO_DETAIL_QUERY_KEY] });
+      const previousTodo = queryClient.getQueryData([
+        TODO_DETAIL_QUERY_KEY,
+        updatedTodoItem.itemId,
+      ]);
+      if (!previousTodo) {
+        queryClient.setQueryData(
+          [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
+          (old: unknown) => {
+            const oldTodo = old as TodoItem;
+            return {
+              ...oldTodo,
+              name: updatedTodoItem.updateTodoDto.name ?? oldTodo.name,
+              memo: updatedTodoItem.updateTodoDto.memo ?? oldTodo.memo,
+              isCompleted:
+                updatedTodoItem.updateTodoDto.isCompleted ??
+                oldTodo.isCompleted,
+            };
+          }
         );
-      });
-      queryClient.setQueryData(
-        [TODO_DETAIL_QUERY_KEY, newTodo.itemId],
-        (old: unknown) => {
-          const typedOld = old as TodoItem;
-          return {
-            id: newTodo.itemId ?? typedOld.id,
-            imageUrl: newTodo.updateTodoDto.imageUrl ?? typedOld.imageUrl,
-            memo: newTodo.updateTodoDto.memo ?? typedOld.memo,
-            name: newTodo.updateTodoDto.name ?? typedOld.name,
-            isCompleted:
-              newTodo.updateTodoDto.isCompleted ?? typedOld.isCompleted,
-          };
-        }
-      );
-      return { previousTodos };
+      }
+      return { previousTodo };
     },
-    onError: (_err, _newTodo, context) => {
-      queryClient.setQueryData([TODOS_QUERY_KEY], context?.previousTodos);
+    onError: (_error, updatedTodoItem) => {
+      const todoName = updatedTodoItem?.updateTodoDto?.name || "TODO";
+      showToast(
+        `"${textShortener(todoName, 18)}" 항목이 수정에 실패했습니다`,
+        "failed"
+      );
+    },
+    onSuccess: (_data, updatedTodoItem) => {
+      const todoName = updatedTodoItem?.updateTodoDto?.name || "TODO";
+      showToast(
+        `"${textShortener(todoName, 18)}" 항목이 수정되었습니다`,
+        "success"
+      );
+    },
+    onSettled: (_data, _error, updatedTodoItem) => {
+      queryClient.invalidateQueries({ queryKey: [TODOS_QUERY_KEY] });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_DETAIL_QUERY_KEY, updatedTodoItem?.itemId],
+      });
     },
   });
   return mutate;

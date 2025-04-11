@@ -1,12 +1,13 @@
+"use client";
 import { TodoItemSummary } from "@/api/api";
 import CheckButton from "@/components/ui/Button/CheckButton";
 import Card from "@/components/ui/Card";
-import useUpdateTodo from "@/hooks/useUpdateTodo";
+import useToggleTodoCompletion from "@/hooks/useToggleTodoCompletion";
 import { cn } from "@/utils/styleUtils";
 import Link from "next/link";
 
 export default function TodoItem({ id, name, isCompleted }: TodoItemSummary) {
-  const updateTodo = useUpdateTodo();
+  const updateTodo = useToggleTodoCompletion();
 
   const handleUpdateTodo = (event: React.MouseEvent) => {
     event.stopPropagation();
