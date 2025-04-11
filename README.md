@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo List App
 
-## Getting Started
+![Todo List App](/public/images/logo.svg)
 
-First, run the development server:
+## 기술 스택
+
+- **Next.js**
+- **TailwindCSS**
+- **Tanstack Query (React Query)**
+- **Return-fetch**
+
+## 주요 기능
+
+### 할 일 추가 기능
+- 홈 화면 상단의 입력 폼에서 새로운 할 일을 쉽게 추가할 수 있습니다.
+- 입력 후 즉시 목록에 반영되어 사용자에게 즉각적인 피드백을 제공합니다.
+
+### 할 일 관리 기능
+- **완료/미완료 전환**: 할 일 항목을 클릭하여 완료 상태를 토글할 수 있습니다.
+- **상세 보기**: 항목 클릭 시 세부 페이지로 이동하여 자세한 정보를 확인하고 관리할 수 있습니다.
+- **할 일 삭제**: 세부 페이지에서 삭제 버튼을 통해 할 일을 제거할 수 있습니다.
+
+### 할 일 필터링 기능
+- TODO 섹션과 DONE 섹션으로 나누어 할 일 목록을 효과적으로 관리합니다.
+- 완료된 일과 완료되지 않은 일을 시각적으로 구분하여 확인할 수 있습니다.
+
+### 메모 및 이미지 기능
+- 할 일에 메모를 추가하여 상세 정보를 기록할 수 있습니다.
+- 이미지 업로드 기능을 통해 할 일과 관련된 시각적 정보를 첨부할 수 있습니다.
+
+## 시작하기
+
+### 설치
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 패키지 설치
+pnpm install
+
+# 개발 서버 실행
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+개발 서버가 http://localhost:3000 에서 실행됩니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 빌드 및 배포
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 프로덕션 빌드
+pnpm build
 
-## Learn More
+# 프로덕션 서버 실행
+pnpm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 프로젝트 구조
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/src/app`: Next.js 페이지 컴포넌트
+- `/src/components`: 재사용 가능한 UI 컴포넌트
+- `/src/api`: API 통신 관련 모듈
+- `/src/hooks`: 커스텀 React 훅
+- `/src/utils`: 유틸리티 함수
+- `/public`: 정적 자원 (이미지, 아이콘 등)
