@@ -1,5 +1,5 @@
-import { AddTodoForm } from "@/app/components/AddTodoForm";
-import ToDoItemList from "@/app/components/TodoItemList";
+import { AddTodoForm } from "@/components/todos/AddTodoForm";
+import ToDoItemList from "@/components/todos/TodoItemList";
 
 export default function Home() {
   return (
