@@ -1,5 +1,5 @@
 import { getTodoById } from "@/api/api";
-import { TODO_DETAIL_QUERY_KEY } from "@/app/constants";
+import { TODO_DETAIL_QUERY_KEY } from "@/constants/queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 export default function useGetToDoDetail(todoId: number) {

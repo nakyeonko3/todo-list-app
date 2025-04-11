@@ -1,5 +1,6 @@
 import { createTodo, TodoItemSummary } from "@/api/api";
-import { TODOS_QUERY_KEY } from "@/app/constants";
+import { TODOS_QUERY_KEY } from "@/constants/queries";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useCreateTodo() {
