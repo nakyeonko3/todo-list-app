@@ -1,3 +1,9 @@
+/**
+ *
+ * Todo 애플리케이션의 API 인터페이스 및 데이터 타입 정의
+ * - Todo 아이템 관련 CRUD 작업을 위한 타입 정의
+ * - 백엔드 서버와 통신하기 위한 인터페이스 제공
+ */
 import { fetchClient } from "./fetchClient";
 
 export interface TodoItem {

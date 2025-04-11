@@ -1,4 +1,12 @@
 "use client";
+/**
+ * AddTodoForm 컴포넌트
+ *
+ * 새로운 할 일을 추가하기 위한 폼 컴포넌트
+ * - 사용자 입력을 받아 새 TODO 항목 생성
+ * - 폼 유효성 검사 및 사용자 피드백 제공(toast)
+ * - useCreateTodo 훅을 통한 API 통신
+ */
 import { InputField } from "@/components/forms/InputField";
 import SubmitButton from "@/components/ui/Button/SubmitButton";
 import useCreateTodo from "@/hooks/useCreateTodos";
