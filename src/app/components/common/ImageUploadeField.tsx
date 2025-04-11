@@ -3,6 +3,7 @@
 import EditImageButton from "@/app/components/common/EditImageButton";
 import PlusButton from "@/app/components/common/PlusButton";
 import useUploadImage from "@/app/hooks/useUploadImage";
+import { cn } from "@/app/utils/styleUtils";
 import Image from "next/image";
 import { useId, useRef } from "react";
 
@@ -10,12 +11,14 @@ interface ImageUploadeFieldrops {
   initialImageUrl?: string | null;
   name: string;
   label: string;
+  className?: string;
 }
 
 export default function ImageUploadeField({
   initialImageUrl = null,
   label,
   name,
+  className = "",
 }: ImageUploadeFieldrops) {
   const inputId = `${name}-${useId()}`;
 
@@ -41,8 +44,15 @@ export default function ImageUploadeField({
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="relative w-full h-[311px] bg-slate-50 border-2 border-dashed border-slate-300 rounded-md flex flex-col justify-center items-center mb-2">
+    <div className={cn(className, "w-full flex flex-col items-center")}>
+      <div
+        className={cn(
+          "relative w-full h-[311px] rounded-3xl flex flex-col justify-center items-center mb-2 overflow-hidden",
+          imageUrl
+            ? "border-0"
+            : "bg-slate-50 border-2 border-dashed border-slate-300"
+        )}
+      >
         {imageUrl ? (
           <EditImageButton
             className="absolute bottom-4 right-4 z-10"

@@ -1,3 +1,4 @@
+import { cn } from "@/app/utils/styleUtils";
 import Image from "next/image";
 
 interface MemoInputProps {
@@ -10,7 +11,12 @@ export default function MemoInput({
   className = "",
 }: MemoInputProps) {
   return (
-    <div className="relative w-full h-[311px] overflow-hidden py-6 px-4">
+    <div
+      className={cn(
+        className,
+        "relative w-full h-[311px] overflow-hidden py-6 px-4 rounded-3xl"
+      )}
+    >
       <div className="flex justify-center">
         <label htmlFor="memo" className="font-extrabold text-amber-800">
           Memo
@@ -21,7 +27,7 @@ export default function MemoInput({
         <textarea
           name="memo"
           defaultValue={defaultValue}
-          className={`${className} bg-transparent z-10 w-full`}
+          className="bg-transparent z-10 w-full"
           rows={9}
         />
       </div>

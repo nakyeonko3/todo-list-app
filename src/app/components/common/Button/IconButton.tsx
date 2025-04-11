@@ -23,9 +23,8 @@ export default function IconButton({
   return (
     <button
       className={cn(
-        "font-bold gap-2 px-4 py-3 w-full h-[52px] rounded-full bg-slate-100 border-2 border-slate-900 flex items-center justify-center relative",
-        className,
-        showLabelOnMobile && "sm:w-[164px]"
+        "font-bold gap-2 px-4 py-3 w-full h-[52px] rounded-full bg-slate-100 border-2 border-slate-900 flex items-center justify-center relative cursor-pointer",
+        className
       )}
       type={type}
       onClick={onClick}
@@ -38,11 +37,7 @@ export default function IconButton({
         width={iconSize}
         height={iconSize}
       />
-      <span
-        className={cn(
-          showLabelOnMobile ? "hidden sm:inline" : "inline sm:hidden"
-        )}
-      >
+      <span className={cn(showLabelOnMobile ? "" : "hidden sm:inline")}>
         {label}
       </span>
     </button>

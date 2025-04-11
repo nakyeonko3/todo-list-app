@@ -46,10 +46,10 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
 
   const handleCheckButton = (event: React.MouseEvent) => {
     event.preventDefault();
-    console.log("itemId", todo.id);
     updateTodo({
       itemId: todo.id,
       updateTodoDto: {
+        name: todo.name,
         isCompleted: !todo.isCompleted,
       },
     });
@@ -78,14 +78,19 @@ export default function TodoDetailContent({ itemId }: { itemId: string }) {
               className="border-0 underline font-bold text-xl w-1/3"
             />
           </Card>
-          <ImageUploadeField
-            initialImageUrl={todo.imageUrl}
-            label={"이미지 업로드"}
-            name={"image"}
-          />
-          <MemoInput defaultValue={todo.memo || ""} />
-          <div className="w-full flex justify-center">
-            <div className="flex w-[343px]">
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <ImageUploadeField
+              initialImageUrl={todo.imageUrl}
+              label={"이미지 업로드"}
+              name={"image"}
+            />
+            <MemoInput
+              defaultValue={todo.memo || ""}
+              className="lg:col-span-2"
+            />
+          </div>
+          <div className="w-full flex justify-center lg:justify-end">
+            <div className="flex w-[343px] ">
               <EditButton />
               <DeleteButton onClick={handleDelete} className="ml-4" />
             </div>

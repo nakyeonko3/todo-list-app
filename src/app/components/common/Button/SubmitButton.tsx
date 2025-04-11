@@ -18,8 +18,8 @@ export default function SubmitButton({
       icon="/icons/plus_black.svg"
       type="submit"
       onClick={onClick}
-      className={cn(className, "w-[56px]")}
-      showLabelOnMobile={true}
+      className={cn(className, "w-[56px] sm:min-w-[164px]")}
+      showLabelOnMobile={false}
     />
   );
 }
