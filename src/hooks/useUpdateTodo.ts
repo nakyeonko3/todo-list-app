@@ -14,22 +14,24 @@ export default function useUpdateTodo() {
         TODO_DETAIL_QUERY_KEY,
         updatedTodoItem.itemId,
       ]);
-      if (!previousTodo) {
-        queryClient.setQueryData(
-          [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
-          (old: unknown) => {
-            const oldTodo = old as TodoItem;
-            return {
-              ...oldTodo,
-              name: updatedTodoItem.updateTodoDto.name ?? oldTodo.name,
-              memo: updatedTodoItem.updateTodoDto.memo ?? oldTodo.memo,
-              isCompleted:
-                updatedTodoItem.updateTodoDto.isCompleted ??
-                oldTodo.isCompleted,
-            };
-          }
-        );
-      }
+
+      queryClient.setQueryData(
+        [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
+        (old: unknown) => {
+          const oldTodo = (old as TodoItem) || {
+            name: "",
+            memo: "",
+            isCompleted: false,
+          };
+          return {
+            ...oldTodo,
+            name: updatedTodoItem.updateTodoDto.name ?? oldTodo.name,
+            memo: updatedTodoItem.updateTodoDto.memo ?? oldTodo.memo,
+            isCompleted:
+              updatedTodoItem.updateTodoDto.isCompleted ?? oldTodo.isCompleted,
+          };
+        }
+      );
 
       const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
       if (previousTodos && Array.isArray(previousTodos)) {
@@ -40,8 +42,10 @@ export default function useUpdateTodo() {
               return todo.id === updatedTodoItem.itemId
                 ? {
                     ...todo,
-                    name: updatedTodoItem.updateTodoDto.name,
-                    isCompleted: updatedTodoItem.updateTodoDto.isCompleted,
+                    name: updatedTodoItem.updateTodoDto.name ?? todo.name,
+                    isCompleted:
+                      updatedTodoItem.updateTodoDto.isCompleted ??
+                      todo.isCompleted,
                   }
                 : todo;
             });
@@ -51,11 +55,13 @@ export default function useUpdateTodo() {
       return { previousTodo, previousTodos };
     },
     onError: (_error, updatedTodoItem, context) => {
-      queryClient.setQueryData(
-        [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
-        context?.previousTodo
-      );
-      queryClient.setQueryData([TODOS_QUERY_KEY], context?.previousTodos);
+      if (context) {
+        queryClient.setQueryData(
+          [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
+          context?.previousTodo
+        );
+        queryClient.setQueryData([TODOS_QUERY_KEY], context?.previousTodos);
+      }
       const todoName = updatedTodoItem?.updateTodoDto?.name || "TODO";
 
       showToast(
