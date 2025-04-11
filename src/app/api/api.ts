@@ -51,7 +51,7 @@ export const createTodo = (createTodoDto: CreateTodoDto) => {
 
 export const getTodos = ({
   page = "1",
-  pageSize = "10",
+  pageSize = "30",
 }: {
   page?: string;
   pageSize?: string;
