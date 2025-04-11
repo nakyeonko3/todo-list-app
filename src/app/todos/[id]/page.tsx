@@ -2,16 +2,14 @@ import TodoDetailContent from "@/app/components/TodoDetailContent";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+// Next.js의 동적 매개변수 타입 지정
 
-export default function TodoDetailPage({ params }: PageProps) {
-  const { id } = params;
-
+export default async function TodoDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
     <ErrorBoundary fallback={<div>에러 발생</div>}>
       <Suspense fallback={<div>Loading...</div>}>
