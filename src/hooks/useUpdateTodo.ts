@@ -1,4 +1,4 @@
-import { TodoItem, updateTodo } from "@/api/api";
+import { TodoItem, TodoItemSummary, updateTodo } from "@/api/api";
 import { TODO_DETAIL_QUERY_KEY, TODOS_QUERY_KEY } from "@/constants/queries";
 import { showToast } from "@/utils/showToast";
 import { textShortener } from "@/utils/textShorten";
@@ -30,10 +30,34 @@ export default function useUpdateTodo() {
           }
         );
       }
-      return { previousTodo };
+
+      const previousTodos = queryClient.getQueryData([TODOS_QUERY_KEY]);
+      if (previousTodos && Array.isArray(previousTodos)) {
+        queryClient.setQueryData(
+          [TODOS_QUERY_KEY],
+          (old: TodoItemSummary[]) => {
+            return old.map((todo) => {
+              return todo.id === updatedTodoItem.itemId
+                ? {
+                    ...todo,
+                    name: updatedTodoItem.updateTodoDto.name,
+                    isCompleted: updatedTodoItem.updateTodoDto.isCompleted,
+                  }
+                : todo;
+            });
+          }
+        );
+      }
+      return { previousTodo, previousTodos };
     },
-    onError: (_error, updatedTodoItem) => {
+    onError: (_error, updatedTodoItem, context) => {
+      queryClient.setQueryData(
+        [TODO_DETAIL_QUERY_KEY, updatedTodoItem.itemId],
+        context?.previousTodo
+      );
+      queryClient.setQueryData([TODOS_QUERY_KEY], context?.previousTodos);
       const todoName = updatedTodoItem?.updateTodoDto?.name || "TODO";
+
       showToast(
         `"${textShortener(todoName, 18)}" 항목이 수정에 실패했습니다`,
         "failed"
