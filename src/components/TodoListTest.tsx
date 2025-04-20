@@ -73,7 +73,6 @@ export default function TodoListTest() {
         <span>Page {page}</span>
         <button
           onClick={handleNextPage}
-          disabled={loading || (todos && todos.length < parseInt(pageSize))}
           className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
         >
           Next
