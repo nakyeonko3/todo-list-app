@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
@@ -6,7 +5,7 @@ export default function Header() {
     <header className="w-full h-[60px] bg-white flex justify-center border-b border-slate-200">
       <div className="flex items-center justify-start h-full w-[1200px] px-4">
         <Link href="/">
-          <Image
+          {/* <Image
             src="/images/logo.svg"
             alt="Logo"
             width={151}
@@ -19,7 +18,7 @@ export default function Header() {
             width={71}
             height={40}
             className="block sm:hidden"
-          />
+          /> */}
         </Link>
       </div>
     </header>
