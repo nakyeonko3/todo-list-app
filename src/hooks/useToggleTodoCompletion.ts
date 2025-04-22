@@ -34,6 +34,11 @@ export default function useToggleTodoCompletion() {
       showToast("TODO 수정에 실패했습니다", "failed");
     },
     onSuccess: (data) => {
+      queryClient.setQueryData([TODOS_QUERY_KEY], (old: TodoItemSummary[]) => {
+        if (!old || !Array.isArray(old)) return old;
+        return old.map((todo) => (todo.id === data.id ? data : todo));
+      });
+
       queryClient.invalidateQueries({
         queryKey: [TODO_DETAIL_QUERY_KEY, data.id],
       });
